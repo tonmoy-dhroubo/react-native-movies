@@ -31,9 +31,14 @@ export function getTrendingMovies(){
 export function getMoviesWithGenre(genreId: number){
     const fullUrl = genresUrl + `&api_key=${apiKey}` + '&with_genres=' + genreId.toString();
     const res = request(genresUrl, {with_genres: genreId.toString()});
-    console.log(fullUrl);
+    //console.log(fullUrl);
     return res;
 }
+
+// export async function getMoviesWithGenreTest(genreId: number){
+//     const res = await axios.get(" https://api.themoviedb.org/3/discover/movie?page=1&with_original_language=bn&sort_by=popularity.desc&api_key=11b03d27bb82e4a75fced23d9cb7c53b&with_genres=28");
+//     return res.data;
+// }
 
 // // endpoints with dynamic params
 
@@ -51,7 +56,7 @@ export function getMoviesWithGenre(genreId: number){
 // export const image342 = posterPath=> posterPath? 'https://image.tmdb.org/t/p/w342'+posterPath : null;
 // export const image185 = posterPath=> posterPath? 'https://image.tmdb.org/t/p/w185'+posterPath : null;
 
-export function getImg(img: string, size : number){
+export function getImg(img: string, size : number = 500){
     switch (size){
         case 500:
             return baseImgUrl + 'w500' + img;

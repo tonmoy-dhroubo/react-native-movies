@@ -6,6 +6,11 @@ import { CarouselItem } from './TrendingCarouselItem';
 var {width, height} = Dimensions.get('window');
 
 export function TrendingCarousel({data} : any){
+
+    function navMovie(id: number){
+        // @TODO navigate to movie screen
+    }
+
     return (
         <View className='flex items-center justify-center flex-1 mt-8'>
             <Text className="mb-6 text-xl text-white"> Trending </Text>
@@ -15,7 +20,7 @@ export function TrendingCarousel({data} : any){
                 firstItem={1}
                 renderItem={({item}) => {
                     return(
-                        <CarouselItem item={item} handleClick={() => null} />
+                        <CarouselItem item={item} handleClick={navMovie} />
                     );
                 }}
                 sliderWidth={width}

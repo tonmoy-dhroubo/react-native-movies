@@ -1,22 +1,32 @@
 import { View, Text, ScrollView, SafeAreaView, StatusBar, Button } from "react-native";
 import {FilmIcon, MagnifyingGlassCircleIcon} from 'react-native-heroicons/outline'
-import { getMoviesWithGenre, getTrendingMovies } from "../api";
+import { getMoviesWithGenre, getMoviesWithGenreTest, getTrendingMovies } from "../api";
 import { useEffect, useState } from "react";
 import { TrendingCarousel } from "../components/TrendingCarousel";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import { GenreSlider } from "../components/GenreSlider";
 
 export default function HomeScreen() {
 
     // States
     const [trends, setTrends] = useState({} as any);
-    const [genres, setGenres] = useState([]);
     const [doneTrends, setDoneTrends] = useState(false);
-    const [doneGenres, setDoneGenres] = useState(false);
+
     const [genreAction, setGenreAction] = useState([] as any);
+    const [genreAdventure, setGenreAdventure] = useState([] as any);
+    const [genreHistory, setGenreHistory] = useState([] as any);
+    const [genreHorror, setGenreHorror] = useState([] as any);
+    const [genreWar, setGenreWar] = useState([] as any);
 
     useEffect(() => {
         getTrends();
-        getGenres();
+        getGenreAction();
+        getGenreAdventure();
+        getGenreHistory();
+        getGenreHorror();
+        getGenreWar();
+
+
     },[]);
 
     async function getTrends(){
@@ -25,23 +35,29 @@ export default function HomeScreen() {
         setDoneTrends(true);
     }
 
-    async function getGenres(){
-
-        // const response : any = [];
-        // const genreCodes = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10752]
-        
-        // genreCodes.forEach(async (code) => {
-        //     const res = await getMoviesWithGenre(code);
-        //     if(res && res.results) response.push(res.results);
-        // });
-
-        // setGenres(response);
-        // setDoneGenres(true);
-        // console.log(genres[11][0].title);
-
+    async function getGenreAction(){
         const response = await getMoviesWithGenre(28);
         if(response) setGenreAction(response.results);
+    }
 
+    async function getGenreAdventure(){
+        const response = await getMoviesWithGenre(12);
+        if(response) setGenreAdventure(response.results);
+    }
+
+    async function getGenreHistory(){
+        const response = await getMoviesWithGenre(36);
+        if(response) setGenreHistory(response.results);
+    }
+
+    async function getGenreHorror(){
+        const response = await getMoviesWithGenre(27);
+        if(response) setGenreHorror(response.results);
+    }
+
+    async function getGenreWar(){
+        const response = await getMoviesWithGenre(10752);
+        if(response) setGenreWar(response.results);
     }
 
     return(
@@ -57,18 +73,19 @@ export default function HomeScreen() {
                 </View>
             </View>
 
+            
+
 
             <ScrollView className="flex-1">
                 {/* Carousel */}
-                {/* { (doneTrends && trends.length > 0) && <TrendingCarousel data={trends} /> } */}
+                { (doneTrends && trends.length > 0) && <TrendingCarousel data={trends} /> }
 
                 {/* Genres */}
-                { 
-                    genres.map((genre : any, index: number) => {
-                        return <Text className="" key={index}>{genre.title}</Text>
-                        }
-                    )
-                }
+                { genreAction.length > 0 && <GenreSlider title="Action" data={genreAction} /> }
+                { genreAdventure.length > 0 && <GenreSlider title="Adventure" data={genreAdventure} /> }
+                { genreHistory.length > 0 && <GenreSlider title="History" data={genreHistory} /> }
+                { genreHorror.length > 0 && <GenreSlider title="Horror" data={genreHorror} /> }
+                { genreWar.length > 0 && <GenreSlider title="War" data={genreWar} /> }
 
                 
 
@@ -77,7 +94,7 @@ export default function HomeScreen() {
 
             
 
-            <Button title="log" onPress={() => console.log(getMoviesWithGenre(28).results)}  />
+            {/* <Button title="log" onPress={() => console.log(getMoviesWithGenre(28).results)}  /> */}
             
         </View>
 
