@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ChevronLeftIcon, StarIcon } from "react-native-heroicons/solid";
 import { LinearGradient } from "expo-linear-gradient";
 import CastSlider from "../components/Movie/CastSlider";
+import { MovieCredits, MovieDetails } from "../interfaces/All";
 
 
 const { width,  height} = Dimensions.get('screen');
@@ -51,19 +52,19 @@ export default function MovieScreen(props: MovieScreenProps) {
 
     return(
       <>
+
+        {/* Back Button */}
+        <SafeAreaView className="absolute z-20 flex-1" >
+          <TouchableOpacity 
+            className="p-3 mt-3 ml-3 rounded-xl bg-slate-950/70"
+            onPress={() => props.navigation.goBack()}
+            >
+              <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
+          </TouchableOpacity>
+          
+        </SafeAreaView>
+
         {movieDetails !== undefined && <ScrollView className="bg-slate-950">
-
-          {/* Back Button */}
-          <SafeAreaView className="absolute z-20 flex-1" >
-            <TouchableOpacity 
-              className="p-3 mt-3 ml-3 rounded-xl bg-slate-950/70"
-              onPress={() => props.navigation.goBack()}
-              >
-                <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
-            </TouchableOpacity>
-            
-          </SafeAreaView>
-
           {/* Poster  */}
           <View>
             <Image  

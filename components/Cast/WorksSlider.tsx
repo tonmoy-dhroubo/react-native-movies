@@ -1,5 +1,6 @@
 import { View, Text, TouchableWithoutFeedback, ScrollView, Image, Dimensions } from "react-native";
 import { getImg } from "../../api";
+import { Works } from "../../interfaces/All";
 
 const {width, height} = Dimensions.get('window');
 

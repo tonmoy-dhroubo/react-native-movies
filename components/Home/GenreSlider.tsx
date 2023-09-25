@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from "react-native";
 import { getImg } from "../../api";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface GenreSliderProps {
     title: string;

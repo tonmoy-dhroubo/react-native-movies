@@ -4,6 +4,7 @@ import { getMoviesWithGenre, getTrendingMovies } from "../api";
 import { useEffect, useState } from "react";
 import { TrendingCarousel } from "../components/Home/TrendingCarousel";
 import { GenreSlider } from "../components/Home/GenreSlider";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
 
@@ -16,6 +17,7 @@ export default function HomeScreen() {
     const [genreHistory, setGenreHistory] = useState([] as any);
     const [genreHorror, setGenreHorror] = useState([] as any);
     const [genreWar, setGenreWar] = useState([] as any);
+    const navigator = useNavigation();
 
     useEffect(() => {
         getTrends();
@@ -69,7 +71,7 @@ export default function HomeScreen() {
                 <View className="flex-row items-center justify-between mx-4">
                     <FilmIcon size="50" color="white" />
                     <Text className="items-center text-2xl font-bold text-cyan-300">Bangla Movies</Text>
-                    <MagnifyingGlassCircleIcon color="white" size="50"/>
+                    <MagnifyingGlassCircleIcon color="white" size="50" onPress={()=>navigator.navigate('Search' as never)} />
                 </View>
             </View>
 
