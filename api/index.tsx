@@ -29,19 +29,49 @@ export function getTrendingMovies(){
 }
 
 export function getMoviesWithGenre(genreId: number){
-    const fullUrl = genresUrl + `&api_key=${apiKey}` + '&with_genres=' + genreId.toString();
+    // const fullUrl = genresUrl + `&api_key=${apiKey}` + '&with_genres=' + genreId.toString();
     const res = request(genresUrl, {with_genres: genreId.toString()});
     //console.log(fullUrl);
     return res;
 }
 
-// export async function getMoviesWithGenreTest(genreId: number){
-//     const res = await axios.get(" https://api.themoviedb.org/3/discover/movie?page=1&with_original_language=bn&sort_by=popularity.desc&api_key=11b03d27bb82e4a75fced23d9cb7c53b&with_genres=28");
-//     return res.data;
-// }
+// https://api.themoviedb.org/3/movie/550?api_key=11b03d27bb82e4a75fced23d9cb7c53b
 
-// // endpoints with dynamic params
+export function getMovieDetails(movieId: number){
+    const id = movieId.toString();
+    const fullUrl = `${baseUrl}/movie/${id}`;
+    console.log(fullUrl);
+    return request(fullUrl, {});
+}
 
+
+export function getMovieCredits(movieId: number){
+    const id = movieId.toString();
+    const fullUrl = `${baseUrl}/movie/${id}/credits`;
+    console.log(fullUrl);
+    return request(fullUrl, {});
+}
+
+export function getCastProfile(castId: number){
+    const id = castId.toString();
+    const fullUrl = `${baseUrl}/person/${id}`;
+    console.log("@@@@@@@@@@@@");
+    return request(fullUrl, {});
+}
+
+export async function getCastWorks(castId: number){
+    const id = castId.toString();
+    const fullUrl = `${baseUrl}/person/${id}/movie_credits`;
+    console.log("!!!!!!!!!!!!!!!!");
+    return request(fullUrl, {});
+}
+
+export async function test(){
+    console.log('^^^^^^^^^');
+    console.log(await request(`https://api.themoviedb.org/3/person/1093644/movie_credits?api_key=11b03d27bb82e4a75fced23d9cb7c53b`, {}));
+}
+
+// http://api.themoviedb.org/3/person/200?api_key=11b03d27bb82e4a75fced23d9cb7c53b
 // // movie
 // const movieDetailsEndpoint = id=> `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
 // const movieCreditsEndpoint = id=> `${apiBaseUrl}/movie/${id}/credits?api_key=${apiKey}`;
@@ -56,7 +86,7 @@ export function getMoviesWithGenre(genreId: number){
 // export const image342 = posterPath=> posterPath? 'https://image.tmdb.org/t/p/w342'+posterPath : null;
 // export const image185 = posterPath=> posterPath? 'https://image.tmdb.org/t/p/w185'+posterPath : null;
 
-export function getImg(img: string, size : number = 500){
+export function getImg(img: string | null, size : number = 500){
     switch (size){
         case 500:
             return baseImgUrl + 'w500' + img;

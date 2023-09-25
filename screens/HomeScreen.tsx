@@ -1,10 +1,9 @@
 import { View, Text, ScrollView, SafeAreaView, StatusBar, Button } from "react-native";
 import {FilmIcon, MagnifyingGlassCircleIcon} from 'react-native-heroicons/outline'
-import { getMoviesWithGenre, getMoviesWithGenreTest, getTrendingMovies } from "../api";
+import { getMoviesWithGenre, getTrendingMovies } from "../api";
 import { useEffect, useState } from "react";
-import { TrendingCarousel } from "../components/TrendingCarousel";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
-import { GenreSlider } from "../components/GenreSlider";
+import { TrendingCarousel } from "../components/Home/TrendingCarousel";
+import { GenreSlider } from "../components/Home/GenreSlider";
 
 export default function HomeScreen() {
 
@@ -63,20 +62,21 @@ export default function HomeScreen() {
     return(
     <>
         <View className="flex-1 bg-slate-950">
+
+            {/* Status Bar */}
             <View className="mx-2 mt-2 ">
-                {/* <Text className="text-white">Home</Text> */}
                 <StatusBar backgroundColor="#000015" />
                 <View className="flex-row items-center justify-between mx-4">
                     <FilmIcon size="50" color="white" />
-                    <Text className="items-center text-2xl font-bold text-yellow-500">Bangla Movies</Text>
+                    <Text className="items-center text-2xl font-bold text-cyan-300">Bangla Movies</Text>
                     <MagnifyingGlassCircleIcon color="white" size="50"/>
                 </View>
             </View>
 
             
-
-
+            {/* Content */}
             <ScrollView className="flex-1">
+
                 {/* Carousel */}
                 { (doneTrends && trends.length > 0) && <TrendingCarousel data={trends} /> }
 
@@ -87,22 +87,9 @@ export default function HomeScreen() {
                 { genreHorror.length > 0 && <GenreSlider title="Horror" data={genreHorror} /> }
                 { genreWar.length > 0 && <GenreSlider title="War" data={genreWar} /> }
 
-                
-
             </ScrollView>
 
-
-            
-
-            {/* <Button title="log" onPress={() => console.log(getMoviesWithGenre(28).results)}  /> */}
-            
         </View>
-
-        
-
-        {/* <Text className="text-white">
-            {{trends.type()}}
-        </Text> */}
     </>
     );
 }

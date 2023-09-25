@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from "react-native";
-import { G } from "react-native-svg";
-import { getImg } from "../api";
+import { getImg } from "../../api";
+import { useNavigation } from "@react-navigation/native";
 
 interface GenreSliderProps {
     title: string;
@@ -10,10 +10,11 @@ interface GenreSliderProps {
 const {width, height} = Dimensions.get('window');
 
 export function GenreSlider(props : GenreSliderProps){
+    
+    const navigator = useNavigation();
 
     function navMovie(id: number){
-        console.log(id);
-        alert(id);
+        navigator.navigate('Movie', {id: id});
     }
 
     return(

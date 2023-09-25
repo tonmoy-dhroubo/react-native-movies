@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import Home from './screens/HomeScreen';
-import { getTrendingMovies } from './api';
+import MovieScreen from './screens/MovieScreen';
+import HomeScreen from './screens/HomeScreen';
+import CastScreen from './screens/CastScreen';
 
 // import { NativeWindStyleSheet } from "nativewind";
 
@@ -19,10 +20,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <stackNav.Navigator>
-        <stackNav.Screen name="Home" component={Home} options={{headerShown:false}}/>
-
-
-
+        <stackNav.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
+        <stackNav.Screen name="Movie" component={MovieScreen} options={{headerShown:false}}/>
+        <stackNav.Screen name="Cast" component={CastScreen} options={{headerShown:false}}/>
       </stackNav.Navigator>
     </NavigationContainer>
   );
